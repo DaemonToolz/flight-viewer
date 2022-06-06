@@ -1,0 +1,28 @@
+.space-around{
+    margin:5px;
+}
+
+img{
+    max-height: 32px;
+}
+
+.selectable{
+    transition: border-left 0.1s ease-in-out;
+    border-left-color: #3f51b5;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+.selectable:hover {
+    border-left-color: #3f51b5;
+    border-left-width: 10px;
+    border-left-style: solid;
+}
+
+.selectable:hover{
+    cursor: pointer;
+}
+
+.header-title ::ng-deep .mat-card-header-text{
+    width: 100%;
+}

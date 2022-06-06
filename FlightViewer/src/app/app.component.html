@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <label style="margin:25px">
+    Flight Viewer
+  </label>
+
+  <a mat-button routerLink="/flights">
+    <mat-icon >flight</mat-icon>
+    <span> Vols </span>
+  </a>
+
+  <a mat-button routerLink="/">
+    <mat-icon >airplane_ticket</mat-icon>
+    <span> Réserver </span>
+  </a>
+
+  <a mat-button routerLink="/">
+    <mat-icon >wallet</mat-icon>
+    <span> MyWallet </span>
+  </a>
+  <a mat-button>
+    <mat-icon>help</mat-icon>
+    <span> Menu d'aide </span>
+  </a>
+</mat-toolbar>
+
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>
