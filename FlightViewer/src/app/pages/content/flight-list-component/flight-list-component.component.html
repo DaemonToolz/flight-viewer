@@ -1,58 +1,75 @@
-<mat-card class.mat-elevation-z1>
-    <mat-card-header>
-        <h1>Tous les vols</h1>
-    </mat-card-header>
-    <mat-card-content>
-        <div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center"  fxLayoutGap="10px">
-            <mat-card  class="space-around selectable" class.mat-elevation-z2 *ngFor="let f of flights" fxFlex="45%">
-                <mat-card-header class="header-title">
-                    <mat-card-title  fxLayout="row wrap" fxLayoutAlign="start"  fxLayoutGap="5px">
-                        <div fxLayout="row wrap" fxFlex fxLayoutAlign="start"  fxLayoutGap="5px">
-                            <span [innerHTML]="f.id.substring(f.id.indexOf('+')+1,f.id.lastIndexOf('+') )"> </span>
-                            <span [innerHTML]="f.id.substring(f.id.lastIndexOf('+')+1)"> </span>
-                            <span> le </span>
-                            <span [innerHTML]="f.flightScheduleDate"></span>       
-                        </div>
-                        <div fxFlex fxLayout="row wrap" fxLayoutAlign="end" fxLayoutGap="5px">
-                            <span [innerHTML]="f.flightStatusPublic"></span>
-                        </div>
-                            
-                    </mat-card-title>   
-                    <mat-card-subtitle>
-                        <span [innerHTML]="f.airline.name"></span>        
-                    </mat-card-subtitle>
+<mat-toolbar color="secondary">
+    <label style="margin:25px">
+        Tous les vols
+    </label>
 
-                </mat-card-header>
-                <mat-card-content  fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+    <mat-form-field >
+        <mat-date-range-input [formGroup]="range" [rangePicker]="flightDatesRangePicker">
+            <input matStartDate placeholder="Début" formControlName="start">
+            <input matEndDate placeholder="Fin" formControlName="end">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="flightDatesRangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #flightDatesRangePicker></mat-date-range-picker>
+    </mat-form-field>
 
-                    <img fxFlexFill src="assets/icons/{{f.airline.code}}.logo.svg" />
-                    <div class="space-around" *ngFor="let leg of f.flightLegs"  fxFlexFill fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
-                        <div fxFlex="15%" fxLayoutAlign="end"  fxLayout="row wrap" >
-                            <mat-icon>flight_takeoff</mat-icon>
-                            <span [innerHTML]="leg.departureInformation.airport.code"></span>
-                        </div>
-                    
-                        <div fxFlex fxLayoutAlign="center center">
-                            <mat-icon>radio_button_checked</mat-icon>
-                            <mat-progress-bar  mode="determinate" [value]="+leg.completionPercentage"></mat-progress-bar>
-                            <mat-icon>radio_button_checked</mat-icon>
-                        </div>
-                            
-                        <div fxFlex="15%" fxLayoutAlign="start"  fxLayout="row wrap" >
-                            <mat-icon>flight_land</mat-icon>
-                            <span [innerHTML]="leg.arrivalInformation.airport.code"></span>
-                        </div>
-                        
-                    </div>
-    
-                </mat-card-content>
-                <mat-card-footer fxLayout="row wrap" fxLayoutAlign="center">
-                   
-                </mat-card-footer>
-            </mat-card>
-        </div>
+    <div fxFlex fxLayoutAlign="flex-end center">
+        <button mat-button (click)="search()"><mat-icon>search</mat-icon></button>
+     </div>
+</mat-toolbar>
 
-      
+<mat-paginator fxFlexFill [length]="pageInfo.fullCount" [pageSize]="pageInfo.pageSize"
+    [pageSizeOptions]="[pageInfo.pageSize]"  (page)="getServerData($event)">
+</mat-paginator>
 
-    </mat-card-content>
-</mat-card>
+
+<div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center" fxLayoutGap="10px">
+    <mat-card (click)="showFlightDetail()" [ngClass]="['space-around', 'selectable', f.flightStatusPublic.toLowerCase()]" class.mat-elevation-z2 *ngFor="let f of flights" fxFlex.gt-md="30%" fxFlex="100%">
+        <mat-card-header class="header-title">
+            <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                    <span [innerHTML]="f.id.substring(f.id.indexOf('+')+1,f.id.lastIndexOf('+') )"> </span>
+                    <span [innerHTML]="f.id.substring(f.id.lastIndexOf('+')+1)"> </span>
+                    <span> le </span>
+                    <span [innerHTML]="f.flightScheduleDate"></span>
+                </div>
+                <div fxFlex fxLayout="row wrap" fxLayoutAlign="end" fxLayoutGap="5px">
+                    <span [innerHTML]="FlightPublicStatus[f.flightStatusPublic]"></span>
+                </div>
+
+            </mat-card-title>
+            <mat-card-subtitle>
+                <span [innerHTML]="f.airline.name"></span>
+            </mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+
+            <img fxFlexFill src="assets/icons/{{f.airline.code}}.logo.svg" />
+            <div class="space-around" *ngFor="let leg of f.flightLegs" fxFlexFill fxLayout="row wrap"
+                fxLayoutAlign="center" fxLayoutGap="5px" >
+                <div fxFlex="15%" fxLayoutAlign="end" fxLayout="row wrap">
+                    <mat-icon>flight_takeoff</mat-icon>
+                    <span [innerHTML]="leg.departureInformation.airport.code"></span>
+                    {{leg.departureInformation.times.scheduled | date:"medium"}}
+                </div>
+
+                <div fxFlex fxLayoutAlign="center center">
+                    <mat-icon>radio_button_checked</mat-icon>
+                    <mat-progress-bar mode="determinate" [value]="+leg.completionPercentage"></mat-progress-bar>
+                    <mat-icon>radio_button_checked</mat-icon>
+                </div>
+
+                <div fxFlex="15%" fxLayoutAlign="start" fxLayout="row wrap">
+                    <mat-icon>flight_land</mat-icon>
+                    <span [innerHTML]="leg.arrivalInformation.airport.code"></span>
+                    {{leg.arrivalInformation.times.scheduled | date:"medium"}}
+                </div>
+
+            </div>
+
+        </mat-card-content>
+        <mat-card-footer fxLayout="row wrap" fxLayoutAlign="center">
+
+        </mat-card-footer>
+    </mat-card>
+</div>

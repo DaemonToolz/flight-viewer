@@ -1,22 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Flight } from '../models/FlightModel';
+import { Flight, FlightExtract } from '../models/FlightModel';
 import { GenericHttpService } from './generic-http.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FlightRetrieverService extends GenericHttpService<Flight> {
+export class FlightRetrieverService extends GenericHttpService<any> {
 
-  constructor(_http: HttpClient) { 
+  constructor(_http: HttpClient, private datePipe: DatePipe) { 
     super(_http);
     this.init(environment.services.airfrance_api); 
   }
 
-  public getFlights():Observable<Flight[]> {
-    return this.getArray("/flights")
+  public getFlightExtract(begin: Date, end: Date, page:number = 0):Observable<FlightExtract> {
+    return this.get(`/flights?page=${page}&start=${this.datePipe.transform(begin,'yyyy-MM-ddTHH:mm:ss')+'Z'}&end=${this.datePipe.transform(end, 'yyyy-MM-ddTHH:mm:ss')+'Z'}`)
   }
 
   public getFlight(id:string):Observable<Flight> {

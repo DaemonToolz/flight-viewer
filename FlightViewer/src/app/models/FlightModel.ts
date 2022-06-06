@@ -1,3 +1,16 @@
+export class FlightExtract {
+	public operationalFlights : Flight[]
+	public page: PageData
+}
+
+export class PageData {
+    public pageSize: number;
+    public pageNumber: number;
+    public fullCount: number;
+    public pageCount: number;
+    public totalPages: number;
+}
+
 export class Flight {
     public flightNumber: number;
     public flightScheduleDate: Date;
@@ -57,26 +70,26 @@ export class Country {
 }
 
 export class FlightETAData {
-    public scheduled: Date;
-    public latestPublished: Date;
-    public estimatedPublic: Date;
-    public estimatedTakeOffTime: Date;
+    public scheduled: string;
+    public latestPublished: string;
+    public estimatedPublic: string;
+    public estimatedTakeOffTime: string;
 }
 
 export enum FlightPublicStatus{
-    CANCELLED = "Annulé",
-    ARRIVED = "0",
-    LANDED = "1",
-    EARLY_ARRIVAL ="2",
-    DELAYED_ARRIVAL ="3",
-    IN_FLIGHT ="4",
-    DEPARTED = "5",
-    DELAYED_DEPARTURE ="6",
-    EARLY_DEPARTURE ="7",
-    NEW_EARLY_DEPARTURE_TIME ="8",
-    NEW_DEPARTURE_TIME ="9",
-    ONTIME ="10",
-    DIVERTED = "11"
+    CANCELLED = "flight.status.cancelled",
+    ARRIVED = "flight.status.arrived",
+    LANDED = "flight.status.landed",
+    EARLY_ARRIVAL ="flight.status.early_arrival",
+    DELAYED_ARRIVAL ="flight.status.delayed_arrival",
+    IN_FLIGHT ="flight.status.flight",
+    DEPARTED = "flight.status.departed",
+    DELAYED_DEPARTURE ="flight.status.delayed_departure",
+    EARLY_DEPARTURE ="flight.status.delayed_departure",
+    NEW_EARLY_DEPARTURE_TIME ="flight.status.new_early_departure",
+    NEW_DEPARTURE_TIME ="flight.status.new_departure",
+    ONTIME ="flight.status.ontime",
+    DIVERTED = "flight.status.diverted"
 }
 
 

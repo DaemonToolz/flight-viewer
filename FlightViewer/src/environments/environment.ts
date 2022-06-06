@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   services: {
-    airfrance_api:`http://localhost:4200/api/v1`
+    airfrance_api:`http://${window.location.hostname}:4200/api/v1`
   }
 };
 

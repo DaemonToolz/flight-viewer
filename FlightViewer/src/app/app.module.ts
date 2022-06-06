@@ -20,26 +20,36 @@ import {MatTableModule} from "@angular/material/table"
 import {MatSliderModule} from "@angular/material/slider"
 import {MatListModule} from "@angular/material/list"
 import {MatDividerModule} from "@angular/material/divider"
-
-import { FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from "@angular/material/datepicker"
+import {MatPaginatorModule} from "@angular/material/paginator"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog'
 import { HttpClientModule } from '@angular/common/http';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import {AppRoutingModule} from "./app-routing.module";
 import { FlightListComponentComponent } from './pages/content/flight-list-component/flight-list-component.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+import { FlightDetailComponent } from './pages/content/flight-detail/flight-detail.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FlightListComponentComponent,
+    FlightDetailComponent,
   ],
   entryComponents:[
   ],
   imports: [
     BrowserModule,
     MatDividerModule,
+    ReactiveFormsModule ,
+    MatDatepickerModule,
+    MatPaginatorModule,
     FlexLayoutModule,
+    ScrollingModule,
     MatToolbarModule,
     MatButtonModule,
     MatGridListModule,MatDialogModule,
@@ -53,16 +63,19 @@ import { FlightListComponentComponent } from './pages/content/flight-list-compon
     MatBadgeModule,
     FormsModule,
     MatFormFieldModule,
-
+    MatNativeDateModule, 
     MatInputModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    LeafletModule,
 
     MatCardModule
   ],
-  providers: [],
+  providers: [DatePipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// 2022-06-06T20:42:07
