@@ -1,0 +1,41 @@
+.space-around{
+    margin:5px;
+}
+
+img{
+    max-height: 32px;
+}
+
+.selectable{
+    transition: border-left 0.1s ease-in-out;
+    border-left-color: #3f51b5;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+.selectable:hover {
+    border-left-color: #3f51b5;
+    border-left-width: 10px;
+    border-left-style: solid;
+}
+
+.selectable:hover{
+    cursor: pointer;
+}
+
+.header-title ::ng-deep .mat-card-header-text{
+    width: 100%;
+}
+
+
+
+mat-toolbar{
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  }
+
+  .cancelled {
+      background-color: rgba(63, 81, 181, 0.5);
+  }

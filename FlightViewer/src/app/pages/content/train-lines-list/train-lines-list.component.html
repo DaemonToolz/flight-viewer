@@ -1,0 +1,38 @@
+<mat-toolbar color="secondary">
+    <label style="margin:25px">
+        Tous les trains
+    </label>
+</mat-toolbar>
+
+
+<div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center" fxLayoutGap="10px">
+    <mat-card [ngClass]="['space-around', 'selectable']" class.mat-elevation-z2 *ngFor="let l of trains.lines" fxFlex.gt-md="30%" fxFlex="100%">
+        <mat-card-header class="header-title">
+            <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                    <span [innerHTML]="l.name"> </span>
+                </div>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <span [innerHTML]="l.network.name"></span>
+            </mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+            <div class="space-around" *ngFor="let route of l.routes" fxFlexFill fxLayout="column"
+                fxLayoutAlign="center" fxLayoutGap="5px" >
+                <div fxFlex  fxLayout="row wrap" fxLayoutGap="5px">
+                    <mat-icon>train</mat-icon>
+                    <span [innerHTML]="route.name"></span>
+                </div>
+                <div fxFlex  fxLayout="row wrap" fxLayoutGap="5px">
+                    <mat-icon>directions</mat-icon>
+                    <span [innerHTML]="route.direction.stop_area.label"></span>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-footer fxLayout="row wrap" fxLayoutAlign="center">
+
+        </mat-card-footer>
+    </mat-card>
+</div>

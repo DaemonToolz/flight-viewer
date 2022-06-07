@@ -31,12 +31,14 @@ import { FlightListComponentComponent } from './pages/content/flight-list-compon
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { FlightDetailComponent } from './pages/content/flight-detail/flight-detail.component';
+import { TrainLinesListComponent } from './pages/content/train-lines-list/train-lines-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlightListComponentComponent,
     FlightDetailComponent,
+    TrainLinesListComponent,
   ],
   entryComponents:[
   ],

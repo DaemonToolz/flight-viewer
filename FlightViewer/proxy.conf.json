@@ -1,6 +1,11 @@
 {
-    "/api/*": {
+    "/api/air/*": {
         "target": "http://192.168.1.62:10000",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/api/train/*": {
+        "target": "http://192.168.1.62:10005",
         "secure": false,
         "logLevel": "debug"
     }
