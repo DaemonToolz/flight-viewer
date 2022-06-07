@@ -5,7 +5,7 @@ import { FlightListComponentComponent } from './pages/content/flight-list-compon
 
 const routes: Routes = [
     {path:'flights', component:FlightListComponentComponent},
-    {path:'flight/detail', component:FlightDetailComponent},
+    {path:'flight/:id/detail', component:FlightDetailComponent},
 ];
 
 @NgModule({

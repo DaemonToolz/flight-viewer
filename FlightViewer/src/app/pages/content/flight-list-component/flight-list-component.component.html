@@ -23,7 +23,7 @@
 
 
 <div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center" fxLayoutGap="10px">
-    <mat-card (click)="showFlightDetail()" [ngClass]="['space-around', 'selectable', f.flightStatusPublic.toLowerCase()]" class.mat-elevation-z2 *ngFor="let f of flights" fxFlex.gt-md="30%" fxFlex="100%">
+    <mat-card (click)="showFlightDetail(f)" [ngClass]="['space-around', 'selectable', f.flightStatusPublic.toLowerCase()]" class.mat-elevation-z2 *ngFor="let f of flights" fxFlex.gt-md="30%" fxFlex="100%">
         <mat-card-header class="header-title">
             <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
                 <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">

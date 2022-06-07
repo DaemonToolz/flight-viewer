@@ -1,4 +1,72 @@
-<div style="height: calc(100vh - 64px);"
-     leaflet 
-     [leafletOptions]="options">
+<div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center" fxLayoutGap="10px">
+     <mat-card class.mat-elevation-z2 fxFlex>
+          <mat-card-header class="header-title">
+               <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="center center" fxLayoutGap="5px">
+                         <img fxFlex src="assets/icons/{{flight.airline.code}}.logo.svg" />
+                    </div>
+                    <div fxLayout="column" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                         <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                              <span
+                                   [innerHTML]="flight.id.substring(flight.id.indexOf('+')+1,flight.id.lastIndexOf('+') )">
+                              </span>
+                              <span [innerHTML]="flight.id.substring(flight.id.lastIndexOf('+')+1)"> </span>
+                              <span> le </span>
+                              <span [innerHTML]="flight.flightScheduleDate"></span>
+                         </div>
+                         <div fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+                              <span [innerHTML]="flight.airline.name"></span>
+                              <span [innerHTML]="FlightPublicStatus[flight.flightStatusPublic]"></span>
+                         </div>
+                    </div>
+
+               </mat-card-title>
+
+          </mat-card-header>
+          <mat-card-content fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center">
+               <div [ngClass]="['space-around', 'leg-parent', flightStatusClass(leg)]" *ngFor="let leg of flight.flightLegs; let i = index" fxFlex
+                    fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
+                    <div [ngClass]="['leg', leg.legStatusPublic.toLowerCase()]"  fxFlex="50px" fxLayout="column" fxLayoutAlign="center center">
+                         <span> Route </span>
+                         <span [innerHTML]="i"> </span>
+                    </div>
+
+                    <div fxFlexFIll fxLayoutAlign="center flex-start " fxLayout="column">
+                         <span [innerHTML]="FlightPublicStatus[leg.legStatusPublic]"></span>
+                    </div>
+
+                    <div fxFlex fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+                         <div fxFlex fxLayoutAlign="center start" fxLayout="column">
+                              <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                   <mat-icon>flight_takeoff</mat-icon>
+                                   <span [innerHTML]="leg.departureInformation.airport.code"></span>
+                              </div>
+                              <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                   <mat-icon>schedule</mat-icon>
+                                   {{leg.departureInformation.times.scheduled | date:"medium"}}
+                              </div>
+                         </div>
+
+
+                         <div fxFlex fxLayoutAlign="center start" fxLayout="column">
+                              <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                   <mat-icon>flight_land</mat-icon>
+                                   <span [innerHTML]="leg.arrivalInformation.airport.code"></span>
+                              </div>
+                              <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                   <mat-icon>schedule</mat-icon>
+                                   {{leg.arrivalInformation.times.scheduled | date:"medium"}}
+                              </div>
+
+                         </div>
+                    </div>
+
+               </div>
+
+               <div id="ol-map" class="map-container"></div>
+          </mat-card-content>
+
+     </mat-card>
+
+
 </div>

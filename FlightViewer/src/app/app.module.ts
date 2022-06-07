@@ -31,8 +31,6 @@ import { FlightListComponentComponent } from './pages/content/flight-list-compon
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { FlightDetailComponent } from './pages/content/flight-detail/flight-detail.component';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-
 
 @NgModule({
   declarations: [
@@ -69,8 +67,6 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    LeafletModule,
-
     MatCardModule
   ],
   providers: [DatePipe ],

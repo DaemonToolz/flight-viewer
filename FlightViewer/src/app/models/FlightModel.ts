@@ -54,7 +54,7 @@ export class Airport{
 }
 
 export class Coordinates {
-    public latitutde:number;
+    public latitude:number;
     public longitude:number;
 }
 
@@ -89,6 +89,7 @@ export enum FlightPublicStatus{
     NEW_EARLY_DEPARTURE_TIME ="flight.status.new_early_departure",
     NEW_DEPARTURE_TIME ="flight.status.new_departure",
     ONTIME ="flight.status.ontime",
+    ON_TIME ="flight.status.ontime",
     DIVERTED = "flight.status.diverted"
 }
 

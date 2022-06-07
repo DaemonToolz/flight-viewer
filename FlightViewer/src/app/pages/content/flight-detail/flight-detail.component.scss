@@ -1,0 +1,56 @@
+.header-title ::ng-deep .mat-card-header-text{
+    width: 100%;
+}
+
+.leg-parent {
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.leg-parent-scheduled, .leg-parent-in_flight {
+    border-color: #3f51b5;
+}
+
+.leg-parent-arrived {
+    border-color: #4db53f;
+}
+
+
+.leg-parent-cancelled {
+    border-color: #b53f3f;
+}
+
+
+.leg {
+    border-radius: 5px 0 0 5px;
+    padding:10px 0 10px ;
+}
+
+.space-around {
+    margin : 5px;
+}
+
+img {
+    max-height: 128px;;
+}
+
+.map-container {
+    flex-grow: 1;
+    width: 100%;
+    height: 250px;;
+}
+
+.cancelled {
+    background-color: #b53f3f;
+    color: white;
+}
+
+.scheduled, .in_flight {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.arrived {
+    background-color: #4db53f;
+    color: white;
+}

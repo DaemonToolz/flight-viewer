@@ -22,7 +22,11 @@ export class FlightListComponentComponent implements OnInit {
   }
 
   public search(){
-    this._flightsService.getFlightExtract(this.range.get("start").value, this.range.get("end").value).subscribe(data => {
+    let endDate = new Date(this.range.get("end").value);
+    endDate.setHours(23);
+    endDate.setMinutes(59);
+    endDate.setSeconds(59);
+    this._flightsService.getFlightExtract(this.range.get("start").value, endDate).subscribe(data => {
       data.operationalFlights.forEach(item => {
         item.flightLegs = item.flightLegs.sort((lega, legb) => new Date(lega.arrivalInformation.times.scheduled).getTime() - new Date(legb.arrivalInformation.times.scheduled).getTime())
       });
@@ -32,7 +36,11 @@ export class FlightListComponentComponent implements OnInit {
   }
 
   public getServerData(event?:PageEvent){
-    this._flightsService.getFlightExtract(this.range.get("start").value, this.range.get("end").value, event.pageIndex).subscribe(data => {
+    let endDate = new Date(this.range.get("end").value);
+    endDate.setHours(23);
+    endDate.setMinutes(59);
+    endDate.setSeconds(59);
+    this._flightsService.getFlightExtract(this.range.get("start").value, endDate, event.pageIndex).subscribe(data => {
       data.operationalFlights.forEach(item => {
         item.flightLegs = item.flightLegs.sort((lega, legb) => new Date(lega.arrivalInformation.times.scheduled).getTime() - new Date(legb.arrivalInformation.times.scheduled).getTime())
       });
@@ -48,8 +56,7 @@ export class FlightListComponentComponent implements OnInit {
   });
 
 
-  public showFlightDetail(){
-    this.router.navigateByUrl("flight/detail")
+  public showFlightDetail(selectedFlight: Flight){
+    this.router.navigate([`flight/${selectedFlight.id}/detail`], {state: {data: selectedFlight}});
   }
-
 }

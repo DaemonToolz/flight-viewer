@@ -1,5 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~leaflet/dist/leaflet.css";
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.polyline-trajectory {
+    background-color: rgba(63, 81, 181, 0.10) !important;
+    color: black !important;
+    border-color: none !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.marker-station {
+    background-color: rgba(63, 81, 181, 1) !important;
+    font-weight: bold !important;
+    color: white !important;
+    border-color: none !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
