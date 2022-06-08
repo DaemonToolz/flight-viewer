@@ -24,9 +24,11 @@
 
           </mat-card-header>
           <mat-card-content fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center">
-               <div [ngClass]="['space-around', 'leg-parent', flightStatusClass(leg)]" *ngFor="let leg of flight.flightLegs; let i = index" fxFlex
-                    fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
-                    <div [ngClass]="['leg', leg.legStatusPublic.toLowerCase()]"  fxFlex="50px" fxLayout="column" fxLayoutAlign="center center">
+               <div [ngClass]="['space-around', 'leg-parent', flightStatusClass(leg)]"
+                    *ngFor="let leg of flight.flightLegs; let i = index" fxFlex fxLayout="row wrap"
+                    fxLayoutAlign="center" fxLayoutGap="20px">
+                    <div [ngClass]="['leg', leg.legStatusPublic.toLowerCase()]" fxFlex="50px" fxLayout="column"
+                         fxLayoutAlign="center center">
                          <span> Route </span>
                          <span [innerHTML]="i"> </span>
                     </div>
@@ -64,6 +66,7 @@
                </div>
 
                <div id="ol-map" class="map-container"></div>
+
           </mat-card-content>
 
      </mat-card>

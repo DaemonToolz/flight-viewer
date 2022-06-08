@@ -93,43 +93,146 @@ export enum FlightPublicStatus{
     DIVERTED = "flight.status.diverted"
 }
 
-
-/*
-
-type FlightLeg struct {
-	Departure       FlightStationInformation `json:"departureInformation"`
-	Arrival         FlightStationInformation `json:"arrivalInformation"`
-
-	Irregulary      Irregularities           `json:"irregulary"`
+export class PassengerParam {
+    id: number;
+    type: string;
+    pnrId: number;
+    birthDate: string;
+    minAge: number;
+    maxAge: number;
+    ticketNumber: string;
 }
 
-type FlightStationInformation struct {
-	Airport Airport       `json:"airport"`
-	Times   FlightETAData `json:"times"`
+export class Itineraries {
+    itineraries: Itinerary[];
+    totalPriceText: string;
 }
 
-type FlightETAData struct {
-	Scheduled        time.Time `json:"scheduled"`
-	LatestPublished  time.Time `json:"latestPublished"`
-	EstimatedPublic  time.Time `json:"estimatedPublic"`
-	EstimatesTakeOff time.Time `json:"estimatedTakeOffTime"`
+export class Itinerary {
+    flightProducts: FlightProduct[];
+    connections: Connection[];
 }
 
-type Place struct {
-	Gates        []string `json:"gateNumber"`
-	Parking      string   `json:"parkingPosition"`
-	PierCode     string   `json:"pierCode"`
-	Terminal     string   `json:"terminal"`
-	BoardingPier string   `json:"boardingPier"`
+export class FlightProduct {
+    passengers: PassengerParam[];
+    price: PriceResponse;
+    connections: Connection[];
+    _links: Links;
 }
 
-type Aircraft struct {
-	Registration     string `json:"registration"`
-	TypeCode         string `json:"typeCode"`
-	TypeName         string `json:"typeName"`
-	OwnerAirlineCode string `json:"ownerAirlineCode"`
-	OwnerAirlineName string `json:"ownerAirlineName"`
+export class PriceResponse {
+    displayPrice: number;
+    totalPrice: number;
+    pricePerPassengerTypes: PricePerPassenger[];
+    flexibilityWaiver: boolean;
+    currency: string;
+    displayType: string;
 }
 
+export class PricePerPassenger {
+    passengerType: string;
+    fare: number;
+    taxes: number;
+    products: number;
+    primaryPax: boolean;
+    surcharges: SurchargePrice[];
+}
 
-*/
+export class SurchargePrice {
+    amount: number;
+    code: string;
+}
+
+export class Connection {
+    numberOfSeatsAvailable: number;
+    fareBasis: FareBasis;
+    segments: Segment[];
+    fareFamily: FareFamily;
+    commercialCabin: string;
+    commercialCabinLabel: string;
+    price: PriceResponse;
+    _links: Links;
+}
+
+export class FareBasis {
+    code: string;
+}
+
+export class Links {
+    flightDetails: Link;
+    ticketConditions: Link;
+    shoppingCart: Link;
+    taxBreakdown: Link;
+    priceDetails: Link;
+    upsellOffers: Link;
+    relatedProducts: Link;
+    information: Link;
+}
+
+export class Link {
+    href: string;
+    templated: boolean;
+    useRootPath: boolean;
+}
+
+export class FareFamily {
+    code: string;
+    hierarchy: number;
+}
+
+export class SellingClass {
+    code: string;
+}
+
+export class Cabin {
+    class: string;
+}
+
+export class Segment {
+    cabin: Cabin;
+    fareBasis: FareBasis;
+    sellingClass: SellingClass;
+}
+
+export class ConnectionDetail {
+    duration: number;
+    segments: SegmentDetail[];
+}
+
+export class SegmentDetail {
+    arrivalDateTime: string;
+    departureDateTime: string;
+    destination: Airport;
+    origin: Airport;
+    highestPriority: boolean;
+    flightDuration: number;
+    dateVariation: number;
+    marketingFlight: MarketingFlight;
+}
+
+export class MarketingFlight {
+    number: string;
+    carrier: Carrier;
+}
+
+export class OperatingFlight {
+    number: string;
+    carrier: Carrier;
+}
+
+export class EquipmentType {
+    code: string;
+    name: string;
+    acvCode: string;
+    _links: Links;
+}
+
+export class Carrier {
+    code: string;
+    name: string;
+}
+
+export class StationCity {
+    iataStationCode: string;
+    name: string;
+}

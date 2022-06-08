@@ -1,0 +1,73 @@
+<mat-toolbar color="secondary">
+    <label style="margin:25px">
+        Toutes les offres
+    </label>
+
+    <div fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+            <input matInput [matDatepicker]="picker" [formControl]="dateFormCtrl">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+            <mat-label>Départ</mat-label>
+            <mat-select [(value)]="departureStation">
+                <mat-option *ngFor="let s of stations" [value]="s">{{s.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+            <mat-label>Arrivée</mat-label>
+            <mat-select [(value)]="arrivalStation">
+                <mat-option *ngFor="let s of stations" [value]="s">{{s.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <div fxFlex fxLayoutAlign="flex-end center">
+        <button mat-button (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+
+<div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
+    <mat-card [ngClass]="['space-around', 'selectable']" class.mat-elevation-z2
+        *ngFor="let f of flights; let ind = index" fxFlex.gt-md="30%" fxFlex="100%">
+        <mat-card-header class="header-title">
+            <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <span> Offre </span>
+                <span [innerHTML]="ind"></span>
+            </mat-card-title>
+            <mat-card-subtitle>
+
+            </mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
+            <div [ngClass]="['space-around', 'leg-parent']" *ngFor="let leg of f.flightProducts; let i = index" fxFlex
+                fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
+                <div fxFlex fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px"
+                    *ngFor="let con of leg.connections">
+                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                        <span> Places disponibles : </span>
+                        <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+                        <span [innerHTML]="con.commercialCabinLabel"></span>
+                    </div>
+                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                        <span [innerHTML]="con.price.totalPrice"></span>
+                        <span [innerHTML]="con.price.currency"></span>
+                    </div>
+                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                        <a [href]="con._links.flightDetails.href"> Flight Details </a>
+                    </div>
+                </div>
+
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</div>

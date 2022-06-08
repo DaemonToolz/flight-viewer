@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { Flight, FlightPublicStatus, PageData } from 'src/app/models/FlightModel';
+import { Flight, FlightPublicStatus, PageData, StationCity } from 'src/app/models/FlightModel';
 import { FlightRetrieverService } from 'src/app/services/flight-retriever.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { FlightRetrieverService } from 'src/app/services/flight-retriever.servic
 })
 export class FlightListComponentComponent implements OnInit {
   public flights: Flight[] = new Array<Flight>();
+  public stations: StationCity[] = new Array<StationCity>();
   public pageInfo: PageData = new PageData();
   public FlightPublicStatus = FlightPublicStatus;
   constructor(private _flightsService: FlightRetrieverService, private router: Router) {
@@ -32,6 +33,12 @@ export class FlightListComponentComponent implements OnInit {
       });
       this.pageInfo = data.page;
       this.flights = data.operationalFlights;  
+    });
+  }
+
+  public async loadStations(){
+    this._flightsService.getStations().subscribe(data => {
+      this.stations = data;
     });
   }
 

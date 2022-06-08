@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Flight, FlightExtract } from '../models/FlightModel';
+import { Flight, FlightExtract, FlightProduct, Itineraries, StationCity } from '../models/FlightModel';
 import { GenericHttpService } from './generic-http.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -22,6 +22,15 @@ export class FlightRetrieverService extends GenericHttpService<any> {
 
   public getFlight(id:string):Observable<Flight> {
     return this.get(`/flights/${id}`)
+  }
+
+
+  public getStations():Observable<StationCity[]> {
+    return this.getArray(`/stations`)
+  }
+
+  public getOffersForDate(date: Date, from: string, to:string):Observable<FlightProduct[]> {
+    return this.getArray(`/offers?date=${this.datePipe.transform(date,'yyyy-MM-dd')}&from=${from}&to=${to}`)
   }
 
 }
