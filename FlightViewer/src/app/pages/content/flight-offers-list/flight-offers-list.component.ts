@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { RequestRedirectType } from 'src/app/models/FlightDetailModel';
 import { Flight, StationCity, PageData, FlightPublicStatus, Itinerary, FlightProduct } from 'src/app/models/FlightModel';
 import { FlightRetrieverService } from 'src/app/services/flight-retriever.service';
 
@@ -10,20 +12,29 @@ import { FlightRetrieverService } from 'src/app/services/flight-retriever.servic
   styleUrls: ['./flight-offers-list.component.scss']
 })
 export class FlightOffersListComponent implements OnInit {
+  @ViewChild("drawer") drawer: MatDrawer;
 
-  public flights: FlightProduct[] = new Array<FlightProduct>();
-  public stations: StationCity[] = new Array<StationCity>();
+  public selectedFlight : Itinerary;
+
   public FlightPublicStatus = FlightPublicStatus;
+
+  public flights: Itinerary[] = new Array<Itinerary>();
+  public stations: StationCity[] = new Array<StationCity>();
 
   public departureStation: StationCity;
   public arrivalStation: StationCity;
   public dateFormCtrl = new FormControl(new Date());
+
   constructor(private _flightsService: FlightRetrieverService, private router: Router) {
     this.loadStations();
-
   }
 
   ngOnInit(): void {
+  }
+
+  public DisplayDetail(selectedFlight: Itinerary){
+    this.selectedFlight = selectedFlight;
+    this.drawer.open()
   }
 
   public search() {
@@ -39,4 +50,6 @@ export class FlightOffersListComponent implements OnInit {
       });
     })
   }
+
+
 }

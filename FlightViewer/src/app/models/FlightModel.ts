@@ -236,3 +236,8 @@ export class StationCity {
     iataStationCode: string;
     name: string;
 }
+
+export class InputUrl {
+    url: string;
+    type: string
+}

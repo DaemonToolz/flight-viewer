@@ -23,6 +23,7 @@ import {MatDividerModule} from "@angular/material/divider"
 import {MatDatepickerModule} from "@angular/material/datepicker"
 import {MatPaginatorModule} from "@angular/material/paginator"
 import {MatSelectModule} from "@angular/material/select"
+import {MatSidenavModule} from "@angular/material/sidenav"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog'
 import { HttpClientModule } from '@angular/common/http';
@@ -34,6 +35,7 @@ import { DatePipe } from '@angular/common';
 import { FlightDetailComponent } from './pages/content/flight-detail/flight-detail.component';
 import { TrainLinesListComponent } from './pages/content/train-lines-list/train-lines-list.component';
 import { FlightOffersListComponent } from './pages/content/flight-offers-list/flight-offers-list.component';
+import { FlightOfferDetailComponent } from './pages/content/flight-offers-list/flight-offer-detail/flight-offer-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +44,13 @@ import { FlightOffersListComponent } from './pages/content/flight-offers-list/fl
     FlightDetailComponent,
     TrainLinesListComponent,
     FlightOffersListComponent,
+    FlightOfferDetailComponent,
   ],
   entryComponents:[
   ],
   imports: [
     BrowserModule,
+    MatSidenavModule,
     MatDividerModule,
     ReactiveFormsModule ,
     MatDatepickerModule,

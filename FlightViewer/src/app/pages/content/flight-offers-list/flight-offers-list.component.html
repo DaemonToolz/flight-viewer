@@ -33,41 +33,50 @@
     </div>
 </mat-toolbar>
 
+<mat-drawer-container fxFlexFill>
+    <mat-drawer #drawer [mode]="'over'">
+        <app-flight-offer-detail *ngIf="selectedFlight != null" [itinerary]="selectedFlight"></app-flight-offer-detail>
+    </mat-drawer>
 
-<div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
-    <mat-card [ngClass]="['space-around', 'selectable']" class.mat-elevation-z2
-        *ngFor="let f of flights; let ind = index" fxFlex.gt-md="30%" fxFlex="100%">
-        <mat-card-header class="header-title">
-            <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
-                <span> Offre </span>
-                <span [innerHTML]="ind"></span>
-            </mat-card-title>
-            <mat-card-subtitle>
+    <mat-drawer-content>
+        <div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
 
-            </mat-card-subtitle>
+            <mat-card [ngClass]="['space-around', 'selectable']" class.mat-elevation-z2
+                *ngFor="let it of flights; let ind = index" fxFlex.gt-md="30%" fxFlex="100%" (click)="DisplayDetail(it)">
+                <mat-card-header class="header-title">
+                    <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                        <span> Offre </span>
+                        <span [innerHTML]="ind"></span>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <mat-card [ngClass]="['space-around']" class.mat-elevation-z2
+                        *ngFor="let f of it.flightProducts; let i = index" fxFlex.gt-md="30%" fxFlex="100%">
+                        <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
 
-        </mat-card-header>
-        <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
-            <div [ngClass]="['space-around', 'leg-parent']" *ngFor="let leg of f.flightProducts; let i = index" fxFlex
-                fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
-                <div fxFlex fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px"
-                    *ngFor="let con of leg.connections">
-                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                        <span> Places disponibles : </span>
-                        <span [innerHTML]="con.numberOfSeatsAvailable"></span>
-                        <span [innerHTML]="con.commercialCabinLabel"></span>
-                    </div>
-                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                        <span [innerHTML]="con.price.totalPrice"></span>
-                        <span [innerHTML]="con.price.currency"></span>
-                    </div>
-                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                        <a [href]="con._links.flightDetails.href"> Flight Details </a>
-                    </div>
-                </div>
-
-            </div>
-        </mat-card-content>
-
-    </mat-card>
-</div>
+                            <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px"
+                                *ngFor="let con of f.connections" (click)="showDetail()">
+                                <div [ngClass]="['offer-item', con.commercialCabin.toLowerCase()]" fxFlex fxLayoutAlign="start center">
+                                    <strong>
+                                        <h2 class="type" [innerHTML]="con.commercialCabinLabel"></h2>
+                                    </strong>
+                                </div>
+                                <div fxLayout="column" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                        <span> Places disponibles : </span>
+                                        <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+                                    </div>
+                                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+                                        <span [innerHTML]="con.price.totalPrice"></span>
+                                        <span [innerHTML]="con.price.currency"></span>
+                                    </div>
+                                </div>
+                            </div>
+                   
+                        </mat-card-content>
+                    </mat-card>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

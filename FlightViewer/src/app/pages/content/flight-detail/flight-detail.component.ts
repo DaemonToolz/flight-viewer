@@ -222,11 +222,3 @@ export class FlightDetailComponent implements OnInit, AfterViewInit {
     return fromLonLat([fsi.airport.location.longitude, fsi.airport.location.latitude]);
   }
 }
-function cos(lat2: number) {
-  throw new Error('Function not implemented.');
-}
-
-function sin(long2: number) {
-  throw new Error('Function not implemented.');
-}
-

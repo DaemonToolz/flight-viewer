@@ -1,0 +1,33 @@
+<div *ngFor="let f of itinerary.flightProducts;">
+
+    <div class="space-around" fxFlex fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px" *ngFor="let con of f.connections"
+        [ngClass]="['offer-item-parent', con.commercialCabin.toLowerCase()+'-border']"
+        (click)="showDetail()">
+        <div [ngClass]="['offer-item', con.commercialCabin.toLowerCase()]" fxFlex fxLayoutAlign="start">
+            <strong>
+                <h2 class="type" [innerHTML]="con.commercialCabinLabel"></h2>
+            </strong>
+        </div>
+        <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
+            <div fxLayout="row wrap" fxFlex fxLayoutAlign="center start" fxLayoutGap="5px">
+                <strong> Places disponibles </strong>
+                <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+            </div>
+            <div fxLayout="row wrap" fxFlex fxLayoutAlign="center end" fxLayoutGap="5px">
+                <span [innerHTML]="con.price.totalPrice"></span>
+                <span [innerHTML]="con.price.currency"></span>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div fxLayout="column" fxFlex fxLayoutAlign="end" fxLayoutGap="5px">
+        <button mat-button
+            (click)="showDetail(f._links.ticketConditions.href, RequestRedirectType.TicketCondition)">Tickets
+            conditions</button>
+        <button mat-button (click)="showDetail(f._links.taxBreakdown.href, RequestRedirectType.TaxBreakdown)">Tax
+            breakdown</button>
+        <button mat-button (click)="showDetail(f._links.priceDetails.href, RequestRedirectType.PriceDetail)">Price
+            Details</button>
+    </div>
+    -->
+</div>
