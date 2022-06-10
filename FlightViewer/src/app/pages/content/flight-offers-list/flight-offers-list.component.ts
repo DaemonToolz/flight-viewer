@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { RequestRedirectType } from 'src/app/models/FlightDetailModel';
-import { Flight, StationCity, PageData, FlightPublicStatus, Itinerary, FlightProduct } from 'src/app/models/FlightModel';
+import { Flight, StationCity, PageData, FlightPublicStatus, Itinerary, FlightProduct, ConnectionDetail } from 'src/app/models/FlightModel';
 import { FlightRetrieverService } from 'src/app/services/flight-retriever.service';
 
 @Component({
@@ -50,6 +50,32 @@ export class FlightOffersListComponent implements OnInit {
       });
     })
   }
+
+  getFlightsHoursFromMinutes(minutes: string): Date {
+    return new Date(0,0,1,0,+minutes,0,0);
+  }
+
+  getFlightDaysFromMinutes(minutes: string): number {
+    return new Date(0,0,1,0,+minutes,0,0).getDate()-1;
+  }
+
+  
+  getFlightsHoursFromMinuteNum(minutes: number): Date {
+    return new Date(0,0,1,0,minutes,0,0);
+  }
+
+  getFlightDaysFromMinutesNum(minutes: number): number {
+    return new Date(0,0,1,0,minutes,0,0).getDate()-1;
+  }
+
+  getConnectionLabel(it: ConnectionDetail): string {
+   if(it.segments.length == 1){
+    return "offer.flight.direct"
+   }
+
+   return "offer.flight.connection"
+  }
+
 
 
 }

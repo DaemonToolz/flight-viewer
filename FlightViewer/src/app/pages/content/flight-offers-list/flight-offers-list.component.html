@@ -33,16 +33,17 @@
     </div>
 </mat-toolbar>
 
-<mat-drawer-container fxFlexFill>
+<mat-drawer-container fullscreen>
     <mat-drawer #drawer [mode]="'over'">
         <app-flight-offer-detail *ngIf="selectedFlight != null" [itinerary]="selectedFlight"></app-flight-offer-detail>
     </mat-drawer>
 
     <mat-drawer-content>
-        <div fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
 
             <mat-card [ngClass]="['space-around', 'selectable']" class.mat-elevation-z2
-                *ngFor="let it of flights; let ind = index" fxFlex.gt-md="30%" fxFlex="100%" (click)="DisplayDetail(it)">
+                *ngFor="let it of flights; let ind = index" fxFlex.lt-md="100%" fxFlex.eq-md="45%"  fxFlex.gt-md="30%" 
+                (click)="DisplayDetail(it)">
                 <mat-card-header class="header-title">
                     <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
                         <span> Offre </span>
@@ -50,29 +51,68 @@
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
-                    <mat-card [ngClass]="['space-around']" class.mat-elevation-z2
-                        *ngFor="let f of it.flightProducts; let i = index" fxFlex.gt-md="30%" fxFlex="100%">
-                        <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <mat-card [ngClass]="['space-around']" class.mat-elevation-z2 *ngFor="let con of it.connections;"
+                        fxFlex.gt-md="30%" fxFlex="100%">
+                        <mat-card-header>
+                            <mat-card-title fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+                                <span *ngIf="con.segments.length > 1" [innerHTML]="con.segments.length"> </span>
+                                <span [innerHTML]="getConnectionLabel(con)"></span>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px" fxFlexFill>
+                                <div fxFlex="20%" fxLayoutAlign="start center"  fxLayout="row wrap"
+                                    fxLayoutGap="5px">
 
-                            <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px"
-                                *ngFor="let con of f.connections" (click)="showDetail()">
-                                <div [ngClass]="['offer-item', con.commercialCabin.toLowerCase()]" fxFlex fxLayoutAlign="start center">
-                                    <strong>
-                                        <h2 class="type" [innerHTML]="con.commercialCabinLabel"></h2>
-                                    </strong>
-                                </div>
-                                <div fxLayout="column" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                                        <span> Places disponibles : </span>
-                                        <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+                                    <mat-icon>schedule</mat-icon>
+                                    <div fxLayout="row wrap" *ngIf="getFlightDaysFromMinutes(con.duration) > 0"
+                                        fxLayoutGap="5px">
+                                        <strong> {{getFlightDaysFromMinutes(con.duration) }}</strong>
+                                        <strong> jours </strong>
                                     </div>
-                                    <div fxLayout="row wrap" fxFlex fxLayoutAlign="start" fxLayoutGap="5px">
-                                        <span [innerHTML]="con.price.totalPrice"></span>
-                                        <span [innerHTML]="con.price.currency"></span>
+
+                                    <strong> {{getFlightsHoursFromMinutes(con.duration) | date:'HH:mm'}}</strong>
+
+                                </div>
+                                <div fxFlex fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+                                    <div class="space-around" *ngFor="let seg of con.segments;">
+
+                                        <div fxFlex fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                            <img src="assets/icons/{{seg.marketingFlight.carrier.code}}.logo.svg" />
+
+                                            <div fxFlex fxLayout="row wrap"
+                                                fxLayoutAlign="center" fxLayoutGap="5px">
+                                                <span [innerHTML]="seg.marketingFlight.carrier.code"> </span>
+                                                <span [innerHTML]="seg.marketingFlight.number"> </span>
+                                            </div>
+                                           
+                                            <div class="space-around" fxFlex fxLayout="row wrap"
+                                                fxLayoutAlign="center" fxLayoutGap="5px">
+                                                <div fxFlex fxLayoutAlign="end" fxLayout="column">
+                                                    <mat-icon>flight_takeoff</mat-icon>
+                                                    <span [innerHTML]="seg.origin.code"></span>
+                                                    <span [innerHTML]="seg.departureDateTime"></span>
+                                                </div>
+
+                                                <div fxFlex fxLayoutAlign="center center">
+                                                    <mat-icon>arrow_right</mat-icon>
+                                                    {{getFlightsHoursFromMinuteNum(seg.flightDuration) | date:'HH:mm'}}
+                                                    <mat-icon>arrow_right</mat-icon>
+                                                </div>
+
+                                                <div fxFlex fxLayoutAlign="start" fxLayout="column">
+                                                    <mat-icon>flight_land</mat-icon>
+                                                    <span [innerHTML]="seg.destination.code"></span>
+                                                    <span [innerHTML]="seg.arrivalDateTime"></span>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
                                     </div>
                                 </div>
+
                             </div>
-                   
                         </mat-card-content>
                     </mat-card>
                 </mat-card-content>

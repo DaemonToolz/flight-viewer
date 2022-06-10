@@ -23,6 +23,7 @@ import {MatDividerModule} from "@angular/material/divider"
 import {MatDatepickerModule} from "@angular/material/datepicker"
 import {MatPaginatorModule} from "@angular/material/paginator"
 import {MatSelectModule} from "@angular/material/select"
+import {MatExpansionModule} from "@angular/material/expansion"
 import {MatSidenavModule} from "@angular/material/sidenav"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule} from '@angular/material/dialog'
@@ -56,6 +57,7 @@ import { FlightOfferDetailComponent } from './pages/content/flight-offers-list/f
     MatDatepickerModule,
     MatSelectModule,
     MatPaginatorModule,
+    MatExpansionModule,
     FlexLayoutModule,
     ScrollingModule,
     MatToolbarModule,

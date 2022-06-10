@@ -110,7 +110,7 @@ export class Itineraries {
 
 export class Itinerary {
     flightProducts: FlightProduct[];
-    connections: Connection[];
+    connections: ConnectionDetail[];
 }
 
 export class FlightProduct {
