@@ -1,6 +1,6 @@
 export class FlightExtract {
-	public operationalFlights : Flight[]
-	public page: PageData
+    public operationalFlights: Flight[]
+    public page: PageData
 }
 
 export class PageData {
@@ -17,7 +17,7 @@ export class Flight {
     public id: string;
     public flightStatusPublic: FlightPublicStatus;
     public airline: Airline;
-    public flightLegs : FlightLeg[];
+    public flightLegs: FlightLeg[];
 }
 
 export class Airline {
@@ -25,17 +25,17 @@ export class Airline {
     public code: string;
 }
 
-export class Aircraft  {
-	registration: string 
-	typeCode: string
-	typeName: string
+export class Aircraft {
+    registration: string
+    typeCode: string
+    typeName: string
 }
 
 export class FlightLeg {
     public status: string;
     public legStatusPublic: FlightPublicStatus;
     public serviceType: string;
-    public completionPercentage: string; 
+    public completionPercentage: string;
     public aircraft: Aircraft;
     public departureInformation: FlightStationInformation;
     public arrivalInformation: FlightStationInformation;
@@ -46,22 +46,22 @@ export class FlightStationInformation {
     public times: FlightETAData;
 }
 
-export class Airport{
+export class Airport {
     public name: string;
     public code: string;
     public city: City;
-    public location : Coordinates
+    public location: Coordinates
 }
 
 export class Coordinates {
-    public latitude:number;
-    public longitude:number;
+    public latitude: number;
+    public longitude: number;
 }
 
 export class City {
     public name: string;
     public code: string;
-    public country : Country
+    public country: Country
 }
 
 export class Country {
@@ -76,20 +76,20 @@ export class FlightETAData {
     public estimatedTakeOffTime: string;
 }
 
-export enum FlightPublicStatus{
+export enum FlightPublicStatus {
     CANCELLED = "flight.status.cancelled",
     ARRIVED = "flight.status.arrived",
     LANDED = "flight.status.landed",
-    EARLY_ARRIVAL ="flight.status.early_arrival",
-    DELAYED_ARRIVAL ="flight.status.delayed_arrival",
-    IN_FLIGHT ="flight.status.flight",
+    EARLY_ARRIVAL = "flight.status.early_arrival",
+    DELAYED_ARRIVAL = "flight.status.delayed_arrival",
+    IN_FLIGHT = "flight.status.flight",
     DEPARTED = "flight.status.departed",
-    DELAYED_DEPARTURE ="flight.status.delayed_departure",
-    EARLY_DEPARTURE ="flight.status.delayed_departure",
-    NEW_EARLY_DEPARTURE_TIME ="flight.status.new_early_departure",
-    NEW_DEPARTURE_TIME ="flight.status.new_departure",
-    ONTIME ="flight.status.ontime",
-    ON_TIME ="flight.status.ontime",
+    DELAYED_DEPARTURE = "flight.status.delayed_departure",
+    EARLY_DEPARTURE = "flight.status.delayed_departure",
+    NEW_EARLY_DEPARTURE_TIME = "flight.status.new_early_departure",
+    NEW_DEPARTURE_TIME = "flight.status.new_departure",
+    ONTIME = "flight.status.ontime",
+    ON_TIME = "flight.status.ontime",
     DIVERTED = "flight.status.diverted"
 }
 
@@ -233,11 +233,78 @@ export class Carrier {
 }
 
 export class StationCity {
-    iataStationCode: string;
-    name: string;
+    iataStationCode: string
+    name: string
+    iataCityCode: string
+    cityName: string
+    iso2CountryCode: string
+    countryName: string
+    subRegionCode: string
+    regionCode: string
+    subRegionName: string
+    regionName: string
 }
 
 export class InputUrl {
     url: string;
     type: string
+}
+
+
+export class StationCityRegion {
+    constructor(name: string, code: string){
+        this.regions = new Map<string, StationCitySubRegion>();
+        this.regionCode = code;
+        this.regionName = name;
+    }
+    regionName: string    
+    regionCode: string
+
+    regions : Map<string,StationCitySubRegion>
+}
+
+export class StationCitySubRegion {
+    constructor(name: string, code: string){
+        this.countries = new Map<string, StationCityCountry>();
+        this.subRegionCode = code;
+        this.subRegionName = name;
+    }
+
+    subRegionCode: string
+    subRegionName: string
+    countries : Map<string,StationCityCountry>
+}
+
+export class StationCityCountry {
+    constructor(name: string, code: string){
+        this.cities = new Map<string, StationCityCity>();
+        this.iso2CountryCode = code;
+        this.countryName = name;
+    }
+
+    iso2CountryCode: string
+    countryName: string
+    cities : Map<string,StationCityCity>
+}
+
+export class StationCityCity {
+    constructor(name: string, code: string){
+        this.airports = new Map<string, StationCityAirport>();
+        this.iataCityCode = code;
+        this.cityName = name;
+    }
+
+    iataCityCode: string
+    cityName: string
+    airports : Map<string,StationCityAirport>
+}
+
+export class StationCityAirport {
+    constructor(name: string, code: string){
+        this.iataStationCode = code;
+        this.name = name;
+    }
+    
+    iataStationCode: string
+    name: string
 }

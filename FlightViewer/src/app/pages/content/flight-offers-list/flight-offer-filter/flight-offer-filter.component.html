@@ -1,0 +1,37 @@
+<div  fxLayout="column" fxLayoutGap="10px">
+
+    <div class="space-around" fxFlexFill fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxFlex fxFlex.lt-md="100%" fxFlexAlign="start" fxLayout="column" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+                <input matInput [min]="minDate" [matDatepicker]="picker" [formControl]="dateFormCtrl">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div fxFlex fxFlex.lt-md="100%"  fxFlexAlign="start" fxLayout="column" fxLayoutGap="10px">
+
+
+            <app-flight-offer-station-search [stations]="stations"></app-flight-offer-station-search>
+
+            <!--
+            <mat-form-field fxFlex>
+                <mat-label>Départ</mat-label>
+                <mat-select [(value)]="filteringOptions.departureStation">
+                    <mat-option *ngFor="let s of stations" [value]="s">{{s.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Arrivée</mat-label>
+                <mat-select [(value)]="filteringOptions.arrivalStation">
+                    <mat-option *ngFor="let s of stations" [value]="s">{{s.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            -->
+        </div>
+    </div>
+</div>
+
+<button mat-raised-button class="search-btn" (click)="search()">
+    <mat-icon>search</mat-icon>
+    <span>Valider</span>
+</button>

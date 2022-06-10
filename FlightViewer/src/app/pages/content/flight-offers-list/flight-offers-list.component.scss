@@ -58,11 +58,18 @@ img {
 }
 
 mat-drawer-container {
-  height: calc(100vh - 128px);
-  top: 128px !important;
+  height: calc(100vh - 64px);
+  top: 64px !important;
   position:absolute !important;
 }
 
 mat-drawer {
   width: 100vw;
+}
+
+.search-btn{
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }

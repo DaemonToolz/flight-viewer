@@ -1,0 +1,18 @@
+<div mat-elevation-z1 class="search-panel">
+    <div *ngFor="let s of stations"> 
+        <label [innerHTML]="s.regionName"></label>
+        <div *ngFor="let sb of s.regions.values()"> 
+            <label [innerHTML]="sb.subRegionName"></label>
+            <div *ngFor="let ct of sb.countries.values()s"> 
+                <label [innerHTML]="ct.countryName"></label>
+                <div *ngFor="let cty of ct.cities.values()"> 
+                    <label [innerHTML]="ct.cityName"></label>
+                    <div *ngFor="let air of cty.airports.values()"> 
+                        <label [innerHTML]="air.name"></label>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
