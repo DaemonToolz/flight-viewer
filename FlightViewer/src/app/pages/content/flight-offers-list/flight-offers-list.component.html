@@ -1,23 +1,23 @@
 <mat-drawer-container fullscreen>
     <mat-drawer #drawer [mode]="'over'">
         <mat-toolbar color="secondary">
+            <label>
+                Rechercher un voyage
+            </label>
             <div fxFlexAlign="center" fxFlex fxLayoutAlign="flex-end center">
                 <button mat-button (click)="closeDrawer()">
                     <mat-icon>close</mat-icon>
                 </button>
             </div>
         </mat-toolbar>
-        <!--<app-flight-offer-filter *ngIf="showFilter" [stations]="allRegions" (onSearch)="search($event)">
-        </app-flight-offer-filter>
-    -->
-        <app-flight-offer-station-search *ngIf="showFilter" [stations]="allRegions"></app-flight-offer-station-search>
+        <app-flight-offer-filter *ngIf="showFilter" [stations]="allRegions" (onSearch)="search($event)"></app-flight-offer-filter>
         <app-flight-offer-detail *ngIf="showOfferDetail" [itinerary]="selectedFlight"></app-flight-offer-detail>
     </mat-drawer>
 
     <mat-drawer-content>
         <button mat-raised-button color="primary" class="search-btn" (click)="showSearchOptions()">
             <mat-icon>search</mat-icon>
-            <span> Rechercher des voyages </span>
+            <span> Rechercher des offres </span>
         </button>
 
         <div fxFlexAlign="center" fxLayout="row wrap" fxLayoutGap="10px">

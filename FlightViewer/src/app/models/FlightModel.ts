@@ -259,7 +259,6 @@ export class StationCityRegion {
     }
     regionName: string    
     regionCode: string
-
     regions : Map<string,StationCitySubRegion>
 }
 

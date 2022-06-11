@@ -1,3 +1,4 @@
+<!--
 <div mat-elevation-z1 class="search-panel">
     <div *ngFor="let s of stations"> 
         <label [innerHTML]="s.regionName"></label>
@@ -15,4 +16,66 @@
             </div>
         </div>
     </div>
+</div>
+-->
+
+<div fxFlexAlign="start" fxLayout="row wrap">
+    <div fxFlexAlign="start" fxFlex="100%" fxLayout="row wrap" fxLayoutGap="10px">
+        <button mat-button fxFlex class="cancel-btn" (click)="submitResult(null)">
+                <label fxFlex> Annuler</label>
+        </button>
+    </div>
+
+    <div fxFlexAlign="start" fxFlex="100%" fxLayout="column" fxLayoutGap="10px">
+        <mat-card *ngFor="let s of getAllRegions" [ngClass]="{'selected':isRegionSelected(s)}" fxFlex class="selectable"
+            (click)="selectRegion(s)">
+            <mat-card-content>
+                <label fxFlex [innerHTML]="s.regionName"></label>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="selectedRegion != null" fxFlexAlign="start" fxFlex="100%" fxLayout="column" fxLayoutGap="10px">
+        <mat-card *ngFor="let subRegion of getAllSubregions" [ngClass]="{'selected':isSubRegionSelected(subRegion)}"
+            fxFlex class="selectable" (click)="selectSubRegion(subRegion)">
+            <mat-card-content>
+                <label fxFlex [innerHTML]="subRegion.subRegionName"></label>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="selectedSubRegion != null" fxFlexAlign="start" fxFlex="100%" fxLayout="row wrap" fxLayoutGap="10px">
+        <mat-card *ngFor="let country of getAllCountries" fxFlex class="selectable"
+            [ngClass]="{'selected':isCountrySelected(country)}" (click)="selecCountry(country)">
+            <mat-card-content>
+                <label fxFlex [innerHTML]="country.countryName"></label>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+    <div *ngIf="selectedCountry != null" fxFlexAlign="start" fxFlex="100%" fxLayout="row wrap" fxLayoutGap="10px">
+        <mat-card *ngFor="let city of getAllCities" fxFlex class="selectable"
+            [ngClass]="{'selected':isCitySelected(city)}" (click)="selectCity(city)">
+            <mat-card-content>
+                <label fxFlex [innerHTML]="city.cityName"></label>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="selectedCity != null" fxFlexAlign="start" fxFlex="100%" fxLayout="row wrap" fxLayoutGap="10px">
+        <mat-card *ngFor="let airport of getAllAirports" fxFlex class="selectable"
+            [ngClass]="{'selected':isAirportSelected(airport)}" (click)="selectAirport(airport)">
+            <mat-card-content>
+                <label fxFlex [innerHTML]="airport.name"></label>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div *ngIf="selectedAirport != null" fxFlexAlign="start" fxFlex="100%" fxLayout="row wrap" fxLayoutGap="10px">
+        <button mat-button fxFlex class="search-btn" (click)="submitResult(selectedAirport)">
+            <label fxFlex> Valider</label>
+        </button>
+    </div>
+
+
 </div>

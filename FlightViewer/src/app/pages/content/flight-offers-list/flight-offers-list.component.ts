@@ -50,7 +50,7 @@ export class FlightOffersListComponent implements OnInit {
 
   public search(filteringOptions: OfferFilteringOptions) {
     this.drawer.close();
-    this._flightsService.getOffersForDate(filteringOptions.departureDate, filteringOptions.departureStation.iataStationCode, filteringOptions.arrivalStation.iataStationCode).subscribe(data => {
+    this._flightsService.getOffersForDate(filteringOptions.departureDate, filteringOptions.departureStation, filteringOptions.arrivalStation).subscribe(data => {
       this.flights = data;
     })
   }

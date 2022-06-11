@@ -1,3 +1,59 @@
-.search-panel{
+.search-panel {
     border-radius: 5px;
 }
+
+
+.center-align {
+    align-items: center;
+    display: flex;
+}
+
+
+.selectable{
+    transition: border-left 0.1s ease-in-out;
+    border-left-color: #3f51b5;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+.selectable:hover {
+    border-left-color: #3f51b5;
+    border-left-width: 10px;
+    border-left-style: solid;
+    cursor: pointer;
+}
+
+label {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+mat-card {
+    margin:5px
+}
+
+.selected {
+    background: #3f51b5;
+    color:white;
+    transition: all 0.2s ease-in-out;
+}
+
+.search-btn{
+    background: darkgreen;
+    color: white;
+}
+
+.cancel-btn{
+    background: darkred;
+    color: white;
+}
+
+.cancel-btn:hover{
+    cursor: pointer;
+}
+
+.search-btn:hover{
+    cursor: pointer;
+}
+

@@ -1,7 +1,7 @@
 import { StationCity } from "./FlightModel";
 
 export class OfferFilteringOptions {
-    public departureStation: StationCity;
-    public arrivalStation: StationCity;
+    public departureStation: string;
+    public arrivalStation: string;
     public departureDate: Date;
 }
