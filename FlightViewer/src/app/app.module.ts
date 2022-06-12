@@ -39,6 +39,7 @@ import { FlightOffersListComponent } from './pages/content/flight-offers-list/fl
 import { FlightOfferDetailComponent } from './pages/content/flight-offers-list/flight-offer-detail/flight-offer-detail.component';
 import { FlightOfferFilterComponent } from './pages/content/flight-offers-list/flight-offer-filter/flight-offer-filter.component';
 import { FlightOfferStationSearchComponent } from './pages/content/flight-offers-list/flight-offer-station-search/flight-offer-station-search.component';
+import { DetailModalComponent } from './pages/modals/detail-modal/detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,10 @@ import { FlightOfferStationSearchComponent } from './pages/content/flight-offers
     FlightOfferDetailComponent,
     FlightOfferFilterComponent,
     FlightOfferStationSearchComponent,
+    DetailModalComponent,
   ],
   entryComponents:[
+    DetailModalComponent
   ],
   imports: [
     BrowserModule,

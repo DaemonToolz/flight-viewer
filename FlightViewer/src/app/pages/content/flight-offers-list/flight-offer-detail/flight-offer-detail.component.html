@@ -1,15 +1,5 @@
 <div *ngFor="let f of itinerary.flightProducts;">
-    <!--
-    <div fxLayout="column" fxFlex fxLayoutAlign="end" fxLayoutGap="5px">
-        <button mat-button
-            (click)="showDetail(f._links.ticketConditions.href, RequestRedirectType.TicketCondition)">Tickets
-            conditions</button>
-        <button mat-button (click)="showDetail(f._links.taxBreakdown.href, RequestRedirectType.TaxBreakdown)">Tax
-            breakdown</button>
-        <button mat-button (click)="showDetail(f._links.priceDetails.href, RequestRedirectType.PriceDetail)">Price
-            Details</button>
-    </div>
-    -->
+
 
     <mat-accordion>
         <mat-expansion-panel *ngFor="let con of f.connections">
@@ -23,15 +13,38 @@
 
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <div fxLayout="row wrap" fxFlex fxLayoutGap="5px">
-                <strong> Places disponibles </strong>
-                <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+            <div fxFlex fxLayoutAlign="center" fxLayout="column"  fxLayoutGap="20px">
+                <div fxFlex="100%">
+                    <div fxLayout="row wrap" fxFlex fxLayoutGap="5px">
+                        <strong> Places disponibles </strong>
+                        <span [innerHTML]="con.numberOfSeatsAvailable"></span>
+                    </div>
+    
+                    <div fxLayout="row wrap" fxFlex fxLayoutGap="5px">
+                        <span [innerHTML]="con.price.totalPrice"></span>
+                        <span [innerHTML]="con.price.currency"></span>
+                    </div>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <button mat-button
+                        (click)="showDetail(f._links.ticketConditions.href, RequestRedirectType.TicketCondition)">Tickets
+                        conditions</button>
+                    <button mat-button
+                        (click)="showDetail(f._links.taxBreakdown.href, RequestRedirectType.TaxBreakdown)">Tax
+                        breakdown</button>
+                    <button mat-button
+                        (click)="showDetail(f._links.priceDetails.href, RequestRedirectType.PriceDetail)">Price
+                        Details</button>
+                </div>
+    
+                <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+                    <button mat-raised-button
+                        (click)="showDetail(f._links.ticketConditions.href, RequestRedirectType.TicketCondition)">Tickets
+                        conditions</button>
+                </div>
+    
             </div>
-
-            <div fxLayout="row wrap" fxFlex fxLayoutGap="5px">
-                <span [innerHTML]="con.price.totalPrice"></span>
-                <span [innerHTML]="con.price.currency"></span>
-            </div>
+     
 
         </mat-expansion-panel>
     </mat-accordion>

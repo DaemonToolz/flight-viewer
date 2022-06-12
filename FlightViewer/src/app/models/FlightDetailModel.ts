@@ -4,6 +4,15 @@ export enum RequestRedirectType {
 	TicketCondition = "ticket_condition"
 }
 
+export class DialogPayload {
+    payload: any;
+    type: RequestRedirectType;
+    public constructor(type: RequestRedirectType, payload: any){
+        this.type = type;
+        this.payload = payload;
+    }
+}
+
 export class TaxBreakdownDetailResult {
     price: TaxPriceDetail;
 }

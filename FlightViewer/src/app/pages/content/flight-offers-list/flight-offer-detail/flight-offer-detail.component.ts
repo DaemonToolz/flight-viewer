@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RequestRedirectType } from 'src/app/models/FlightDetailModel';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogPayload, RequestRedirectType } from 'src/app/models/FlightDetailModel';
 import { Itinerary } from 'src/app/models/FlightModel';
+import { DetailModalComponent } from 'src/app/pages/modals/detail-modal/detail-modal.component';
 import { FlightRetrieverService } from 'src/app/services/flight-retriever.service';
 
 @Component({
@@ -11,16 +13,20 @@ import { FlightRetrieverService } from 'src/app/services/flight-retriever.servic
 export class FlightOfferDetailComponent implements OnInit {
   @Input() itinerary: Itinerary;
   public RequestRedirectType = RequestRedirectType;
-  constructor(private _flightsService: FlightRetrieverService) { 
+  private ref: MatDialogRef<DetailModalComponent>;
+  constructor(private _flightsService: FlightRetrieverService, private dialog: MatDialog) { 
     
   }
 
   ngOnInit(): void {
   }
 
-  public showDetail(url: string, dataType: string) {
+  public showDetail(url: string, dataType: RequestRedirectType) {
     this._flightsService.getOffersDetail(url, dataType).subscribe(result => {
-      console.log(result);
+      let payload = new DialogPayload(dataType, result)
+      this.ref = this.dialog.open(DetailModalComponent, {
+        data: payload,
+      })
     })
   }
 

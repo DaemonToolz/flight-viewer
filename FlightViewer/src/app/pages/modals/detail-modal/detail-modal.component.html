@@ -1,0 +1,107 @@
+<h1 mat-dialog-title>Détail</h1>
+<div mat-dialog-content>
+    <div *ngIf="detailResult != null" fxFlexAlign="center" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+        <div *ngFor="let total of detailResult.priceDetails.totals" fxFlexAlign="start" fxLayout="row wrap"
+            fxLayoutAlign="center" fxLayoutGap="10px">
+            <label [innerHTML]="total.amount"></label>
+            <label [innerHTML]="total.currency"></label>
+        </div>
+    </div>
+
+    <div *ngIf="condition != null" fxFlexAlign="center" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+    
+        <div *ngFor="let con of condition.connections" fxFlexAlign="start" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="con.tripText"></span>
+            <span [innerHTML]="con.travelClassText"></span>
+            <strong> Condition du ticket </strong>
+            <div fxFlexAlign="start" *ngFor="let interval of con.travelDateIntervals" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px">
+                <span [innerHTML]="interval.from"></span>
+                <span>-</span>
+                <span [innerHTML]="interval.to"></span>
+            </div>
+        </div>
+        <strong> Conditions Flying Blue </strong>
+        <div fxFlexAlign="start" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="condition.flyingBlue.detailsText"></span>
+            <span [innerHTML]="condition.flyingBlue.detailsTextQualPoints"></span>
+        </div>
+        <strong> Disclaimer </strong>
+        <div fxFlexAlign="start" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="condition.disclaimer.flexibilityText"></span>
+            <span [innerHTML]="condition.disclaimer.handBaggageText"></span>
+        </div>
+    </div>
+
+    <div *ngIf="taxBreadownData != null" fxFlexAlign="center" fxLayout="column" fxLayoutAlign="center"
+        fxLayoutGap="10px">
+        <strong> Détail des taxes </strong>
+        <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <strong>Total</strong>
+            <span [innerHTML]="taxBreadownData.price.totalPrice"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <strong>Total taxe</strong>
+            <span [innerHTML]="taxBreadownData.price.totalTaxes"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <strong>Total Fare</strong>
+            <span [innerHTML]="taxBreadownData.price.totalFare"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <strong>Total Produits</strong>
+            <span [innerHTML]="taxBreadownData.price.totalProducts"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <strong>Total sans surchages</strong>
+            <span [innerHTML]="taxBreadownData.price.totalTaxesWithoutAirTransportationSurcharges"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <strong>Total Surcharges</strong>
+        <div *ngFor="let surcharge of taxBreadownData.price.totalSurcharges" fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="surcharge.name"></span>
+            <span [innerHTML]="surcharge.amount"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+        <strong>Total surcharges transport</strong>
+        <div *ngFor="let surcharge of taxBreadownData.price.totalAirTransportationSurcharges" fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="surcharge.name"></span>
+            <span [innerHTML]="surcharge.amount"></span>
+            <span [innerHTML]="taxBreadownData.price.currency"></span>
+        </div>
+
+        <strong>Prix par passager</strong>
+        <div *ngFor="let price of taxBreadownData.price.pricePerPassengerTypes" fxFlexAlign="start" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="5px">
+            <span [innerHTML]="price.products"></span>
+            <strong>Prix</strong>
+            <div fxFlexAlign="start" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <span [innerHTML]="price.fare"></span>
+                <span [innerHTML]="taxBreadownData.price.currency"></span>
+            </div>
+
+            <strong>Détail du prix</strong>
+            <div fxFlexAlign="start" *ngFor="let fare of price.fareDetails" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <span [innerHTML]="fare.name"></span>
+                <span [innerHTML]="fare.amount"></span>
+                <span [innerHTML]="taxBreadownData.price.currency"></span>
+            </div>
+
+            <strong>Détail du taxes</strong>
+            <div fxFlexAlign="start" *ngFor="let fare of price.surcharges" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <span [innerHTML]="fare.name"></span>
+                <span [innerHTML]="fare.amount"></span>
+                <span [innerHTML]="taxBreadownData.price.currency"></span>
+            </div>
+
+            <strong>Détail du taxes transport</strong>
+            <div fxFlexAlign="start" *ngFor="let fare of price.airTransportationSurcharges" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="5px">
+                <span [innerHTML]="fare.name"></span>
+                <span [innerHTML]="fare.amount"></span>
+                <span [innerHTML]="taxBreadownData.price.currency"></span>
+            </div>
+        </div>
+    </div>
+</div>
